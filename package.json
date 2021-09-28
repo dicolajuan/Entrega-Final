@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "name": "entrega-final",
+  "version": "1.0.0",
+  "description": "Proyecto E-Commerce",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dicolajuan/Entrega-Final.git"
+  },
+  "author": "Di Cola Juan Ignacio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dicolajuan/Entrega-Final/issues"
+  },
+  "homepage": "https://github.com/dicolajuan/Entrega-Final#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "nodemon": "^2.0.13",
+    "socket.io": "^4.2.0"
+  }
+}
