@@ -1,0 +1,22 @@
+[
+	{
+		"id": "2",
+		"timestamp": "21/02/2020",
+		"name": "nuevo Producto",
+		"description": "prueba de prods",
+		"code": "1",
+		"image": "url",
+		"price": "123",
+		"stock": "1"
+	},
+	{
+		"id": "1",
+		"timestamp": "21/02/2020",
+		"name": "nuevo Producto",
+		"description": "prueba de prods",
+		"code": "1",
+		"image": "url",
+		"price": "123",
+		"stock": "1"
+	}
+]

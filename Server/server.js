@@ -1,6 +1,8 @@
 import express from "express";
 import http from "http";
-import {prodRouter} from './Routes/Productos/product-routes.js';
+import { carritoRouter } from "./Routes/Carrito/carrito-routes.js";
+import { prodRouter } from './Routes/Productos/product-routes.js';
+
 
 export const app = express();
 const serverHTTP = http.Server(app);
@@ -10,6 +12,7 @@ const PORT = 8080; //Cambiar al pasar a glitch
 
 
 app.use('/productos',prodRouter);
+app.use('/carrito', carritoRouter);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
