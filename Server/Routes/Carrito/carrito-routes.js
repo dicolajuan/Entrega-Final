@@ -28,7 +28,6 @@ async function createCarrito  () {
 
 
 carritoRouter.get('/',(req, res)=>{
-    console.log(carrito.productos.find(e => e.id == 2) == null);
     res.json({message:'test carrito route'});
 });
 
@@ -53,7 +52,7 @@ carritoRouter.get('/listar/:idProd?', (req, res)=>{
         }
     } catch {
         console.log('Error. Id inexistente');
-        res.status(400).json('<h1 style="color:red"> Parece que hubo un error </h1> ');
+        res.status(400).json('Error al listar carrito');
     }
     
 });
@@ -83,7 +82,7 @@ carritoRouter.post('/agregar/:idP', async (req, res)=>{
         
     } catch {
         console.log('Error. Id inexistente en carrito');
-        res.status(400).json('<h1 style="color:red"> Parece que hubo un error </h1> ');
+        res.status(400).json('Error al agregar el producto al carrito');
     }
 });
 
@@ -98,7 +97,6 @@ carritoRouter.delete('/borrar/:idP', async (req, res)=>{
         res.json(carrito);
     } catch {
         console.log('Error. Id inexistente');
-        res.status(400).json('<h1 style="color:red"> Parece que hubo un error </h1> ');
+        res.status(400).json('Error al borrar el producto del carrito');
     }
-    //res.json({message:`borrar producto id: ${req.params.idP} del carrito id: ${req.params.idC}`});
 });

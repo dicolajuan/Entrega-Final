@@ -1,6 +1,6 @@
 import { Archivo } from "../Server/Archivo.js";
 
-const FILENAME = '../Files/productos.txt';
+const FILENAME = './Files/productos.txt';
 
 export class Product {
 

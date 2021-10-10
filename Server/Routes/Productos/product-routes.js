@@ -1,15 +1,17 @@
 import express from "express";
 import {Product} from "../../../Classes/Product.js";
+import { dateFormatDMY, dateISOString } from "../../../Helpers/HelpersDatesFunctions.js";
 export const prodRouter = express.Router();
 
 prodRouter.use(express.json());
 prodRouter.use(express.urlencoded({extended:true}));
 
-const isAdmin = false;
+const isAdmin = true;
 
-export const productos = new Product().getProducts() 
+export const productos = await new Product().getProducts()
     ? await new Product().getProducts() 
     : [];
+console.log('productos: ',productos);
 
 prodRouter.get('/',(req, res)=>{
     res.json({message:'test route'});
@@ -22,10 +24,7 @@ prodRouter.get('/listar/:id?', async (req, res)=>{
         res.status(200).json(
             {prods: prodArray.find(prod => prod.id === id)}
         );
-
-        //res.json({message:`listar producto id: ${req.params.id}`});
     } else {
-        console.log(prodArray);
         res.json({prodArray});
     }
     
@@ -41,13 +40,15 @@ prodRouter.post('/agregar', (req, res)=>{
 const agregarProducto = (req,res) => {
     try {
         let bodyProd = req.body;
-        let objProd = new Product(bodyProd.id,bodyProd.timestamp,bodyProd.name,bodyProd.desc,bodyProd.code,bodyProd.img,bodyProd.price,bodyProd.stock);
+        let id = productos.length + 1;
+        let timestamp = dateISOString();
+        let objProd = new Product(id,timestamp,bodyProd.name,bodyProd.desc,bodyProd.code,bodyProd.img,bodyProd.price,bodyProd.stock);
         productos.push(objProd);
         objProd.setProduct(productos);
         res.status(200).json({message:'Agregar producto'});
     } catch (error) {
         console.log('Error al obtener los productos del body', error);
-        res.status(400).send('<h1 style="color:red"> Parece que hubo un error </h1> ');
+        res.status(400).json('Error al grabar el producto');
     }
 };
 
@@ -77,6 +78,6 @@ const borrarProducto = (req,res) => {
         res.status(200).json(productos);
     } catch {
         console.log('Error. Id inexistente');
-        res.status(400).json('<h1 style="color:red"> Parece que hubo un error </h1> ');
+        res.status(400).json('Error al borrar el producto');
     }
 };
