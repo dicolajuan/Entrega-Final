@@ -59,8 +59,23 @@ prodRouter.put('/actualizar/:id', (req, res)=>{
                 res.status(401).json({error : -1, descripcion: 'ruta producto/actualizar método PUT no autorizada'});
 })
 
-const actualizarProducto = (req,res) => {   
-    res.status(200).json({message:`actualizar producto id: ${req.params.id}`});
+const actualizarProducto = async (req,res) => {   
+        try{
+            const id = req.params.id;
+            const productIndex = productos.findIndex(x=>x.id == id);
+            const productAttributes = Object.entries(req.body);
+            productAttributes.forEach(x=>{
+                let attr = x[0];
+                let newValue = x[1];
+                if(x !== null){
+                    productos[productIndex][attr] = newValue
+                }
+            })
+            await new Product().saveProduct(productos);
+            res.status(200).json({modifiedProduct:productos[productIndex], allProducts:productos })
+        }catch {
+            res.status(400).json({error: 'Error al actualizar el producto'})
+        }
 };
 
 prodRouter.delete('/borrar/:id', (req, res)=>{

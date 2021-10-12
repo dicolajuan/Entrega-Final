@@ -32,4 +32,9 @@ export class Product {
         return prodArray.find(prod => prod.id === id);
     }
 
+    async saveProduct(objProduct){
+        let sFile = new Archivo(FILENAME);
+        await sFile.saveFile(objProduct);
+    };
+
 }
