@@ -21,7 +21,7 @@ export class Archivo {
             await fs.promises.writeFile(this.fileName,JSON.stringify(object,null,'\t'));
             console.log('Archivo grabado!');
         } catch  {
-            throw new Error('Error al grabar');
+            throw new Error(`Error al grabar ${this.fileName}`);
         }
     }
 

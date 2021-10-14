@@ -46,7 +46,12 @@ carritoRouter.get('/listar/:idProd?', (req, res)=>{
         let idprod = req.params.idProd;
         if(idprod){
             let prod = carrito.productos.find(carProd => carProd.id == idprod);
-            res.json({mensaje:`Listar el producto: ${idprod} del carrito`, product:prod});
+            if(prod != null){
+                res.json({mensaje:`Listar el producto: ${idprod} del carrito`, product:prod});
+            } else {
+                console.log('Error. Id inexistente');
+                res.status(400).json('Error al listar carrito');
+            }
         } else {
             res.json({message: `listar todos los productos del carrito`,carrito});
         }
@@ -74,7 +79,8 @@ carritoRouter.post('/agregar/:idP', async (req, res)=>{
             carrito.saveProduct();
             res.json(carrito);
         } else {
-            let indexObj = carrito.productos.map(e => {return e.id}).indexOf(req.params.idP);
+            let id = parseInt(req.params.idP);
+            let indexObj = carrito.productos.map(e => {return e.id}).indexOf(id);
             carrito.productos[indexObj].cantidad += 1;
             carrito.saveProduct();
             res.json(carrito);
@@ -93,8 +99,13 @@ carritoRouter.post('/agregar/:idP', async (req, res)=>{
 carritoRouter.delete('/borrar/:idP', async (req, res)=>{
     try {
         let indexObj = carrito.productos.map(e => {return e.id}).indexOf(req.params.idP);
-        carrito.productos.splice(indexObj,1);
-        res.json(carrito);
+        if( indexObj != -1){
+            carrito.productos.splice(indexObj,1);
+            res.json(carrito);
+        } else {
+            console.log('Error. Id inexistente');
+            res.status(400).json('Error al borrar el producto del carrito');
+        }
     } catch {
         console.log('Error. Id inexistente');
         res.status(400).json('Error al borrar el producto del carrito');

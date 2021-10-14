@@ -18,14 +18,23 @@ prodRouter.get('/',(req, res)=>{
 });
 
 prodRouter.get('/listar/:id?', async (req, res)=>{
-    let id = req.params.id;
-    let prodArray = await new Product().getProducts();
-    if(id){
-        res.status(200).json(
-            {prods: prodArray.find(prod => prod.id === id)}
-        );
-    } else {
-        res.json({prodArray});
+    try {
+        let id = req.params.id;
+        let prodArray = await new Product().getProducts();
+        let prodFind = prodArray.find(prod => prod.id == id);
+        if(id) {
+            if (prodFind != null) {
+                res.status(200).json({product: prodFind});
+            } else {
+                console.log('Error. Id inexistente');
+                res.status(400).json('Error al listar producto');
+            }
+        } else {
+            res.json({prodArray});
+        }
+    } catch {
+        console.log('Error. Id inexistente');
+        res.status(400).json('Error al listar producto');
     }
     
 });

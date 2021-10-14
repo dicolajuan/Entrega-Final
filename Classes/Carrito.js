@@ -1,6 +1,6 @@
 import { Archivo } from "../Server/Archivo.js";
 
-const FILENAME = '../Files/carritos.txt';
+const FILENAME = './Files/carritos.txt';
 
 export class Carrito {
 

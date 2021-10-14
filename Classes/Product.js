@@ -29,7 +29,7 @@ export class Product {
     async findProduct(id){
         let rFile = new Archivo(FILENAME);
         let prodArray = await rFile.readFile();
-        return prodArray.find(prod => prod.id === id);
+        return prodArray.find(prod => prod.id == id);
     }
 
     async saveProduct(objProduct){
