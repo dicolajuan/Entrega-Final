@@ -2,14 +2,13 @@ import express from "express";
 import http from "http";
 import { carritoRouter } from "./Routes/Carrito/carrito-routes.js";
 import { prodRouter } from './Routes/Productos/product-routes.js';
-
+// import dotenv from 'dotenv';
+// dotenv.config({path: '../appsettings.env'});
 
 export const app = express();
 const serverHTTP = http.Server(app);
 
-// const PORT = proccess.env.PORT || 8080;
-const PORT = 8080; //Cambiar al pasar a glitch
-
+const PORT = process.env.PORT || 8080;
 
 app.use('/productos',prodRouter);
 app.use('/carrito', carritoRouter);
