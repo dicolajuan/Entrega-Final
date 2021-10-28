@@ -12,4 +12,4 @@ const options = {
 
 export const knexSQLite3 = knex(options);
 
-console.log('Conectando a la base de datos SQLite3...');
+// console.log('Conectando a la base de datos SQLite3...');

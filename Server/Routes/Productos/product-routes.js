@@ -1,6 +1,7 @@
 import express from "express";
 import {Product} from "../../../Classes/Product.js";
 import { actualizarProductoFS, agregarProductoFS, borrarProductoFS, listarProductosFS } from "../../../Controllers/functionsCRUD-FS.js";
+import { actualizarProductoMongo, agregarProductosMongo, borrarProductoMongo, listarProductosMongo } from "../../../Controllers/functionsCRUD-Productos-Mongo.js";
 import { actualizarProductoSQL, agregarProductoSQL, borrarProductoSQL, listarProductosSQL } from "../../../Controllers/functionsCRUD-Productos-SQL.js";
 export const prodRouter = express.Router();
 
@@ -27,7 +28,12 @@ prodRouter.get('/listar/:id?', async (req, res)=>{
             case '2':
                 listarProductosSQL(req,res);
                 break;
+            case '4':
+                listarProductosMongo(req,res);
+                break;
             default:
+                console.log('Tipo de persistencia incorrecta');
+                res.status(400).json('Tipo de persistencia incorrecta');
                 break;
         }
     } catch (error){
@@ -49,7 +55,12 @@ prodRouter.post('/agregar', (req, res)=>{
                 case '2':
                     agregarProductoSQL(req,res);
                     break;
+                case '4':
+                    agregarProductosMongo(req,res);
+                    break;
                 default:
+                    console.log('Tipo de persistencia incorrecta');
+                    res.status(400).json('Tipo de persistencia incorrecta');
                     break;
             }
         } catch (error) {
@@ -69,6 +80,9 @@ prodRouter.put('/actualizar/:id', (req, res)=>{
                     break;
                 case '2':
                     actualizarProductoSQL(req,res);
+                    break;
+                case '4':
+                    actualizarProductoMongo(req,res);
                     break;
                 default:
                     console.log('Tipo de persistencia incorrecta');
@@ -95,6 +109,9 @@ prodRouter.delete('/borrar/:id', (req, res)=>{
                     break;
                 case '2':
                     borrarProductoSQL(req,res);
+                    break;
+                case '4':
+                    borrarProductoMongo(req,res);
                     break;
                 default:
                     console.log('Tipo de persistencia incorrecta');

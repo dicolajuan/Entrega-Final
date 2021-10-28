@@ -70,7 +70,7 @@ const iniciarTablaProductos = async () => {
         await iniciarTablaProductos();
         await crearCarrito();
     } catch (error) {
-        console.log('Error al iniciar las tablas', error);
+        console.log('Error al iniciar las tablas SQL');
     }
 })();
 
@@ -146,9 +146,9 @@ async function crearCarrito () {
             let timestamp = dateISOString();
             await optionDB('CarritoCab').insert({timestamp: timestamp, Activo:1});
         } else {
-            console.log('Existe el carrito', carritos );
+            // console.log('Existe el carrito', carritos );
         }
     } catch (error) {
-        console.log(`Error al crear el carrito`, error );
+        console.log('Error al crear el carrito', error );
     }
 }

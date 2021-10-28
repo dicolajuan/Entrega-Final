@@ -13,4 +13,4 @@ const options = {
 
 export const knexMySQL = knex(options);
 
-console.log('Conectando a la base de datos MySQL...');
+// console.log('Conectando a la base de datos MySQL...');
